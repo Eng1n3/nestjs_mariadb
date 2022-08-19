@@ -2,13 +2,16 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { User } from './entities/user.entity';
 import { Latihan13Module } from './latihan13/latihan13.module';
 import { Latihan12Module } from './latihan12/latihan12.module';
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
-    Latihan13Module,
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development.local', '.env.development'],
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -19,6 +22,7 @@ import { Latihan12Module } from './latihan12/latihan12.module';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    Latihan13Module,
     Latihan12Module,
   ],
   controllers: [AppController],

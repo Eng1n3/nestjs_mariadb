@@ -1,14 +1,19 @@
-export interface UsersAndCount {
-  data: Users[];
+export interface UsersResponse {
+  statusCode: number;
+  message: string;
+  data: User[];
   count: number;
 }
 
-export interface Users {
+export interface IGetUserAll {
+  users: User[];
+  count: number;
+}
+
+export interface User {
   name: string;
   username: string;
   emailAddress: string;
-  password: string;
   updatedAt: Date;
   createdAt: Date;
-  isActive: boolean;
 }
